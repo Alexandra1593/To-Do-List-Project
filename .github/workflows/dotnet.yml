@@ -21,8 +21,9 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore OrganiseMe/OrganiseMe/OrganiseMe.csproj
     - name: Build
       run: dotnet build OrganiseMe/OrganiseMe/OrganiseMe.csproj --no-restore --configuration Release
     - name: Test
       run: dotnet test OrganiseMe/OrganiseMe/OrganiseMe.csproj --no-build --configuration Release --verbosity normal
+
