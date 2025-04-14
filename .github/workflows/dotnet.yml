@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,9 +20,8 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      run: dotnet restore OrganiseMe/OrganiseMe/OrganiseMe.csproj
+      run: dotnet restore OrganiseMe/OrganiseMe.csproj
     - name: Build
-      run: dotnet build OrganiseMe/OrganiseMe/OrganiseMe.csproj --no-restore --configuration Release
+      run: dotnet build OrganiseMe/OrganiseMe.csproj --no-restore --configuration Release
     - name: Test
-      run: dotnet test OrganiseMe/OrganiseMe/OrganiseMe.csproj --no-build --configuration Release --verbosity normal
-
+      run: dotnet test OrganiseMe/OrganiseMe.csproj --no-build --configuration Release --verbosity normal
