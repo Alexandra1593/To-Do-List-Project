@@ -11,6 +11,10 @@ on:
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: ./OrganiseMe/OrganiseME
+
 
     runs-on: ubuntu-latest
 
