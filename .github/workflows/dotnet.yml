@@ -10,7 +10,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+   build:
+    defaults:
+      run:
+        working-directory: ./OrganiseMe
 
     runs-on: ubuntu-latest
 
