@@ -30,3 +30,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    - name: Build with dotnet
+      run: dotnet build OrganiseMe/OrganiseMe.csproj --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish OrganiseMe/OrganiseMe.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
