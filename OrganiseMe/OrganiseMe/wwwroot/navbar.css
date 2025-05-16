@@ -1,0 +1,84 @@
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8%;
+    position: fixed;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(192, 201, 199) 40%, rgba(239, 214, 169, 0.8) 70%, rgba(9, 129, 109, 0.67) 100%);
+    color: rgb(255, 255, 255);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    
+    backdrop-filter: blur(3px);
+    font-size: clamp(11px, 2vw, 20px);
+    z-index: 1000;
+}
+
+#intro {
+    position: relative;
+    height: auto;
+   
+    align-self: left;
+    background-image: url('/Images/to-do-list.png');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    padding-left: 60px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2vw, 30px); 
+    
+    
+}
+.navbar{
+    position: relative;
+    width:100%;
+    justify-content: space-between; 
+    align-items: center;
+ 
+}
+nav ul {
+    position: relative;
+    max-width:80%;
+    font-family: 'Merriweather', serif;
+    font-size: 120%;
+    
+    list-style: none;
+    padding:0;
+    justify-self:right;
+    margin-right: 0;
+ 
+}
+
+    nav ul li {
+        font-weight: bold;
+        display: inline;
+       
+    }
+
+        nav ul li a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+a:hover {
+    color: rgb(125, 109, 109);
+    cursor: pointer;
+    text-shadow: 0 0 4px #07130f;
+}
+
+
+input[type=text] {
+
+
+ color:#07130f;
+   
+  
+  background-color: rgb(255, 255, 255);
+  background-image: url('/Images/search.png');
+  background-position:1%,1%;
+  background-repeat: no-repeat;
+  padding-left: 22px;
+}
+

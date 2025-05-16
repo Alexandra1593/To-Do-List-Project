@@ -1,0 +1,68 @@
+.board{
+
+ 
+     background-color: #393E46; 
+    
+}
+
+.swim-lane{
+    background:#ffffff97;
+    box-shadow: 0px 0px 10px rgb(9, 0, 0);
+}
+.task{
+    background-color: #222831;
+    color:aliceblue;
+}
+#add-new-buttons button{
+    background-color: #7E99A3;
+}
+
+
+.modal-content{
+    background-color:#393e4698;
+    color:white;
+    box-shadow: 0px 5px 15px  #ffffffdd;
+    border:2px, solid;
+    border-color: rgb(0, 0, 0);
+}
+.modal-content button{
+    box-shadow: 1px 1px 5px  #000000a0;
+    background-color:#222831;
+    color:aliceblue;
+    
+}
+.modal-content button:hover{
+    background-color: #1A3636;
+    color: rgb(156, 154, 154);
+    font-weight: bold;
+}
+
+
+
+
+/* drop down menu*/
+
+.dropdown-menu{
+    background-color: #283137;
+   
+    
+}
+.dropdown-menu button{
+     color: rgb(0,0,0);
+    background-color: #939393;
+}
+
+
+
+
+
+
+
+
+
+
+
+input[type=text]:focus {
+  background-color: rgb(42, 42, 42);
+  color: aliceblue;
+}
