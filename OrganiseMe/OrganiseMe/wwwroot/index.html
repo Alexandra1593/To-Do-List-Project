@@ -7,43 +7,116 @@
     <title>Drag & Drop API</title>
 
     <link rel="stylesheet" href="style.css" />
-
-    <script src="drag.js" defer></script>
+    <link rel="stylesheet" href="navbar.css"/>
+    <link id="themeStylesheet" rel="stylesheet" href="LightTheme.css">
+    <link rel="icon" type="image/x-icon" href="/Images/sticky-note.png">
+  
     <script src="Todo.js" defer></script>
 </head>
 <body>
-    <p id="intro"> Manage your tasks</p>
+<header>
+    <nav class="navbar">
+        <p id="intro">Organise me</p>
+        <ul>
+          
+            <li><a href="#">Boards</a></li>
+            <li><a href="#">Home</a></li>
+            <li class="right" id="search"><input type="text" placeholder="Search.."></li>
+            <li class="right"> Notifications</li>
+            <li class="right"><a href="#"> Log out</a></li>
+            
+        </ul>
+    </nav>
+</header>
+
+
+    <div id="contextMenu" class="dropdown-menu">
+        <button onclick="editItem()">Edit</button>
+        <button id="deleteTaskBtn">Delete</button>
+
+    </div>
+
+
+   
     <div class="board">
-        <form id="todo-form">
-            <input type="text" placeholder="New TODO..." id="todo-input" />
-            <button type="submit">Add +</button>
-        </form>
+        <section id="add-new-buttons">
+
+            <button id="openModalInput">+Add New Task </button>
+            <button id="Add-TaskBar" >+Add New Column</button>
+        </section>
 
         <div class="lanes">
-            <div class="swim-lane" id="todo-lane">
+            <div class="swim-lane" id="todo-lane" data-column="TO DO">
                 <h3 class="heading">TO DO</h3>
-
+            <div class="tasks-board">
+                <p class="task" draggable="true">1</p>
+                <p class="task" draggable="true">2</p>
+                <p class="task" draggable="true">3</p>
+                <p class="task" draggable="true">1</p>
+                <p class="task" draggable="true">2</p>
+                <p class="task" draggable="true">3</p>
+                <p class="task" draggable="true">1</p>
+                <p class="task" draggable="true">2</p>
+                <p class="task" draggable="true">3</p>
                 <p class="task" draggable="true">1</p>
                 <p class="task" draggable="true">2</p>
                 <p class="task" draggable="true">3</p>
             </div>
-
-            <div class="swim-lane">
-                <h3 class="heading">Do</h3>
-
-                <p class="task" draggable="true">a</p>
             </div>
 
-            <div class="swim-lane">
-                <h3 class="heading">Done</h3>
+            <div class="swim-lane" data-column="In Progress">
+                <h3 class="heading">In progress</h3>
+                <div class="tasks-board">
+                <p class="task" draggable="true">a</p>
+                </div>
+            </div>
 
+            <div class="swim-lane" data-column="Done">
+                <h3 class="heading">Done</h3>
+                <div class="tasks-board">
                 <p class="task" draggable="true">
                     text
                 </p>
+            </div>
             </div>
 
 
         </div>
     </div>
+
+
+
+
+
+
+
+
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeSwitch">
+        <label for="themeSwitch" class="toggle-label">
+            <div class="circle"></div>
+        </label>
+
+    <!---Modal for input tasks-->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <label>Task Name:</label>
+            <input type="text" id="taskTitle" placeholder="Task title" />
+            <label>Select Column:</label>
+            <select id="taskColumn">
+                    <option value="TO DO">To Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+             </select>
+                <div class="modalbtns">
+                <button id="saveTaskBtn">Save</button>
+                <button id="closeModalBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="ThemeChanger.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 </html>

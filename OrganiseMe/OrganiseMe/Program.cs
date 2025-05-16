@@ -13,13 +13,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ✅ Enable CORS (Allow frontend to access API)
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
 });
 
 var app = builder.Build();
+
+
+
+
 
 // ✅ Enable serving static files (HTML, CSS, JS from wwwroot/)
 app.UseStaticFiles();  // <<----- ADD THIS LINE
@@ -31,7 +41,7 @@ if (app.Environment.IsDevelopment())
 }
 
 // ✅ Enable CORS for frontend requests
-app.UseCors("AllowAllOrigins");
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 app.MapControllers();

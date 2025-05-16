@@ -16,50 +16,43 @@
     width: 100%;
     height: 100vh;
     overflow: scroll;
-    background-image: url('relax.jpg');
+    
     background-position: center;
     background-size: cover;
+   background-color: black;
 }
-#intro{
-    align-self:center;
-    font-family:'Century Gothic';
 
-
-}
-/* ---- FORM ---- */
-#todo-form {
+/* ---- ADD NEW BUTTONS SECTION  ---- */
+#add-new-buttons {
     padding: 32px 32px 0;
+    margin: 2%;
+
+}
+#add-new-buttons button{
+    width: 20%;
+    max-height: 20%;
+    padding: 12px 32px;
+    border-radius: 4px;
+    border: none;
+    width: 20%;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    justify-content: center;
 }
 
-    #todo-form input {
-        padding: 12px;
-        margin-right: 12px;
-        width: 225px;
-        border-radius: 4px;
-        border: none;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-        background: white;
-        font-size: 14px;
-        outline: none;
-    }
+   
 
-    #todo-form button {
-        padding: 12px 32px;
-        border-radius: 4px;
-        border: none;
-        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
-        background: #ffffff;
-        color: black;
-        font-weight: bold;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-/* ---- BOARD ---- */
+/* ---- TASK BOARD ---- */
 .lanes {
+   
     display: flex;
     align-items: flex-start;
     justify-content: start;
+    background: none;
     gap: 16px;
     padding: 24px 32px;
     overflow: scroll;
@@ -70,19 +63,36 @@
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 8px;
+    position: relative;
 }
 
 .swim-lane {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: #f4f4f4;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    gap:12px;
+    
     padding: 12px;
     border-radius: 4px;
     width: 225px;
     min-height: 120px;
+    max-height: 70%;
     flex-shrink: 0;
+    
+    
+   
+}
+.tasks-board{
+    position: relative;
+    display: block;
+    padding: 12px;
+    gap:12px;
+    /* background:none; */
+   
+    flex-shrink: 1;  
+    overflow-y:scroll;
+    scroll-behavior: smooth;
+   
 }
 
 .task {
@@ -90,14 +100,159 @@
     color: black;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
     padding: 12px;
+    margin:3%;
     border-radius: 4px;
     font-size: 16px;
     cursor: move;
 }
 
 .is-dragging {
-    scale: 1.05;
+   
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
     background: rgb(50, 50, 50);
     color: white;
+}
+
+
+
+
+
+
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+   
+   
+}
+.dropdown-menu button{
+    position: relative;
+    align-self: baseline;
+    padding: 12%;
+    margin: 10%;
+    cursor:pointer;
+    align-self: center;
+    border-radius: 10%;
+}
+/* Modal */
+
+#taskModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+   
+}
+#taskModal button{
+    position: relative;
+    margin-bottom: 0;
+    padding: 12px;
+    width: 30%;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10%; 
+   border:none;
+    justify-self: center;
+    align-self: center;
+} 
+.modalbtns{
+    position: relative;
+    width: 100%;
+    align-items: center;
+   
+}
+
+#closeModalBtn{
+    margin-right:0%;
+
+}
+
+
+
+
+/* Theme toggle button*/
+.theme-toggle {
+    position:fixed;
+    width: 70px;
+    height: 5%;
+    left:2%;
+    bottom:5%;
+    z-index: 100;
+}
+
+.toggle-label {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: URL("/Images/btn.jpeg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+
+    border-radius: 50px;
+    box-shadow: 3px 3px 10px #000000, -3px -3px 10px #ffffff;
+    display: flex;
+    align-items: center;
+   
+    padding: 5px;
+    transition: background 0.3s;
+}
+
+.circle {
+    position:relative;
+    width: 40%;
+    height: 30px;
+    margin: 2px;
+    background: linear-gradient(145deg, #FFCDB2,beige, #E5989B);
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px #000000, -2px -2px 10px #ffffff;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .toggle-label {
+    background-image: URL("/Images/2btn.jpeg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    box-shadow: 3px 3px 10px hsl(0, 0%, 100%), -3px -3px 10px #000000;
+
+
+}
+
+input[type="checkbox"]:checked + .toggle-label .circle {
+    transform: translateX(100%);
+    background: linear-gradient(145deg, #0a0b0e,#393E46, #222831);
+    
+
 }
