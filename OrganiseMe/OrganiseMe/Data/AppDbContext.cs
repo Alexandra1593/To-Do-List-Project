@@ -17,7 +17,7 @@ namespace OrganiseMe.Data
         public AppDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer("Server=DESKTOP-TFD2QL5;Database=OrganiseMeDB;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-TFD2QL5;Database=OrganiseMeDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
 
             return new AppDbContext(optionsBuilder.Options);
         }

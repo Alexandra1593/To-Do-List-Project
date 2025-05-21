@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrganiseMe.Data;
-
+using OrganiseMe.Repositories;
+using OrganiseMe.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,7 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // ✅ Enable CORS (Allow frontend to access API)
 
-
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ITaskService, TaskService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>

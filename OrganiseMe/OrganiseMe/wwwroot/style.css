@@ -210,11 +210,11 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: URL("/Images/btn.jpeg");
+/*    background-image: URL("/Images/btn.jpeg");
     background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
-
+*/
     border-radius: 50px;
     box-shadow: 3px 3px 10px #000000, -3px -3px 10px #ffffff;
     display: flex;
@@ -241,7 +241,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked + .toggle-label {
-    background-image: URL("/Images/2btn.jpeg");
+   
     background-repeat: no-repeat;
     background-size:cover;
     background-position: center;
@@ -256,3 +256,35 @@ input[type="checkbox"]:checked + .toggle-label .circle {
     
 
 }
+
+/*status*/
+
+.status-index {
+    position: relative;
+    top:4px;
+    bottom: 4px;
+    right: 0px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #ccc;
+    text-transform: uppercase;
+    
+   
+}
+
+    /*  culori pe status */
+    .status-index.urgent {
+        color:darkred;
+    }
+
+    .status-index.normal {
+        color: dodgerblue;
+    }
+
+    .status-index.optional {
+        color: gray;
+    }
+
+    .status-index.mandatory {
+        color: darkorange;
+    }

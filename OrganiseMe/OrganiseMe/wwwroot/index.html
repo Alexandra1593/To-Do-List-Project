@@ -11,7 +11,6 @@
     <link id="themeStylesheet" rel="stylesheet" href="LightTheme.css">
     <link rel="icon" type="image/x-icon" href="/Images/sticky-note.png">
   
-    <script src="Todo.js" defer></script>
 </head>
 <body>
 <header>
@@ -21,7 +20,7 @@
           
             <li><a href="#">Boards</a></li>
             <li><a href="#">Home</a></li>
-            <li class="right" id="search"><input type="text" placeholder="Search.."></li>
+            <li class="right" id="search"><input id="searchInput" type="text" placeholder="Search.."></li>
             <li class="right"> Notifications</li>
             <li class="right"><a href="#"> Log out</a></li>
             
@@ -42,42 +41,57 @@
         <section id="add-new-buttons">
 
             <button id="openModalInput">+Add New Task </button>
-            <button id="Add-TaskBar" >+Add New Column</button>
+            <button id="Add-TaskBar">+Add New Column</button>
         </section>
+
+
+        <label for="statusFilter">Filter by Status:</label>
+        <select id="statusFilter">
+            <option value="">All</option>
+            <option value="urgent">Urgent</option>
+            <option value="normal">Normal</option>
+            <option value="optional">Optional</option>
+            <option value="mandatory">Mandatory</option>
+        </select>
+
+
+        <!--<ul id="taskList"></ul>-->
+
+
 
         <div class="lanes">
             <div class="swim-lane" id="todo-lane" data-column="TO DO">
                 <h3 class="heading">TO DO</h3>
-            <div class="tasks-board">
-                <p class="task" draggable="true">1</p>
-                <p class="task" draggable="true">2</p>
-                <p class="task" draggable="true">3</p>
-                <p class="task" draggable="true">1</p>
-                <p class="task" draggable="true">2</p>
-                <p class="task" draggable="true">3</p>
-                <p class="task" draggable="true">1</p>
-                <p class="task" draggable="true">2</p>
-                <p class="task" draggable="true">3</p>
-                <p class="task" draggable="true">1</p>
-                <p class="task" draggable="true">2</p>
-                <p class="task" draggable="true">3</p>
-            </div>
+                <div class="tasks-board">
+                    <p class="task" draggable="true">1</p>
+                    <p class="task" draggable="true">2</p>
+                    <p class="task" draggable="true">3</p>
+                    <p class="task" draggable="true">1</p>
+                    <p class="task" draggable="true">2</p>
+                    <p class="task" draggable="true">3</p>
+                    <p class="task" draggable="true">1</p>
+                    <p class="task" draggable="true">2</p>
+                    <p class="task" draggable="true">3</p>
+                    <p class="task" draggable="true">1</p>
+                    <p class="task" draggable="true">2</p>
+                    <p class="task" draggable="true">3</p>
+                </div>
             </div>
 
             <div class="swim-lane" data-column="In Progress">
                 <h3 class="heading">In progress</h3>
                 <div class="tasks-board">
-                <p class="task" draggable="true">a</p>
+                    <p class="task" draggable="true">a</p>
                 </div>
             </div>
 
             <div class="swim-lane" data-column="Done">
                 <h3 class="heading">Done</h3>
                 <div class="tasks-board">
-                <p class="task" draggable="true">
-                    text
-                </p>
-            </div>
+                    <p class="task" draggable="true">
+                        text
+                    </p>
+                </div>
             </div>
 
 
@@ -97,26 +111,41 @@
             <div class="circle"></div>
         </label>
 
-    <!---Modal for input tasks-->
-    <div class="modal" id="taskModal">
-        <div class="modal-content">
-            <label>Task Name:</label>
-            <input type="text" id="taskTitle" placeholder="Task title" />
-            <label>Select Column:</label>
-            <select id="taskColumn">
+        <!---Modal for input tasks-->
+        <div class="modal" id="taskModal">
+            <div class="modal-content">
+                <label>Task Name:</label>
+                <input type="text" id="taskTitle" placeholder="Task title" />
+
+                <label>Select Column:</label>
+                <select id="taskColumn">
                     <option value="TO DO">To Do</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Done">Done</option>
-             </select>
+                </select>
+                <label>Status:</label>
+                <select id="taskStatus">
+                    <option value="normal">Normal</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="optional">Optional</option>
+                    <option value="mandatory">Mandatory</option>
+                </select>
                 <div class="modalbtns">
-                <button id="saveTaskBtn">Save</button>
-                <button id="closeModalBtn">Cancel</button>
+                    <!--<button id="saveTaskBtn">Save</button>-->
+
+                    <button onclick="createTask()">Add</button>
+                    <button id="closeModalBtn">Cancel</button>
+                </div>
             </div>
         </div>
-    </div>
 
 
-    <script src="ThemeChanger.js"></script>  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="ThemeChanger.js"></script>
+        <script src="Filter.js"></script>
+        <script src="TaskCRUD.js"></script>
+
+        <script src="Todo.js"></script>
+        <!--<script src="Search.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </body>
 </html>

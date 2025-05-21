@@ -11,6 +11,7 @@ namespace OrganiseMe.Models
         public string? Title { get; set; }
 
         public string?  Description { get; set; }
+        public string? Status { get; set; } // "To-Do", "In Progress", "Done"
 
         [Required]
         public string? Column { get; set; } // "To-Do", "In Progress", "Done"

@@ -1,37 +1,75 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using OrganiseMe.Models;
-[ApiController]
-[Route("api/[controller]")]
-public class TasksController : ControllerBase
+using OrganiseMe.Services;
+
+
+
+namespace OrganiseMe.Controllers
 {
-    private static List<TaskItem> tasks = new();
-
-    [HttpPost]
-    public IActionResult CreateTask([FromBody] TaskItem task)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TaskController : ControllerBase
     {
-        if (task.Title == null || task.Column == null)
-            return BadRequest("Titlul și coloana sunt obligatorii.");
+        private readonly ITaskService _service;
 
-        task.Id = tasks.Count > 0 ? tasks.Max(t => t.Id) + 1 : 1;
-        tasks.Add(task);
-        return Ok(task);
-    }
+        public TaskController(ITaskService service)
+        {
+            _service = service;
+        }
 
-    [HttpGet]
-    public IActionResult GetTasks()
-    {
-        return Ok(tasks);
-    }
+        // GET: api/task
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var tasks = await _service.GetAllAsync();
+            return Ok(tasks);
+        }
 
-    [HttpDelete("{id}")]
-    public IActionResult DeleteTask(int id)
-    {
-        var task = tasks.FirstOrDefault(t => t.Id == id);
-        if (task == null) return NotFound();
+        // GET: api/task/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var task = await _service.GetByIdAsync(id);
+            return task == null ? NotFound() : Ok(task);
+        }
 
-        tasks.Remove(task);
-        return NoContent();
+        // POST: api/task
+        [HttpPost]
+        public async Task<IActionResult> Create(TaskItem task)
+        {
+            task.CreatedAt = DateTime.UtcNow;
+            await _service.CreateAsync(task);
+            return CreatedAtAction(nameof(Get), new { id = task.Id }, task);
+        }
+
+        // PUT: api/task/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, TaskItem task)
+        {
+            if (id != task.Id)
+                return BadRequest("Id mismatch");
+
+            await _service.UpdateAsync(task);
+            return NoContent();
+        }
+
+        // DELETE: api/task/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _service.DeleteAsync(id);
+            return NoContent();
+        }
+
+        // GET: api/task/filter?status=urgent
+        [HttpGet("filter")]
+        public async Task<IActionResult> FilterByStatus([FromQuery] string status)
+        {
+            if (string.IsNullOrWhiteSpace(status))
+                return BadRequest("Status is required.");
+
+            var filtered = await _service.GetByStatusAsync(status);
+            return Ok(filtered);
+        }
     }
 }
