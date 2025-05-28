@@ -1,3 +1,11 @@
+body{
+    
+     /* background-color: #393E46;  */
+     background-image: URL('/wwwroot/Images/bg.jpg');
+     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .board{
 
  
@@ -65,4 +73,29 @@
 input[type=text]:focus {
   background-color: rgb(42, 42, 42);
   color: aliceblue;
+}
+
+/* Register page */
+.button-container{
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+   
+}
+
+.button-container button{
+    background-color: #0b2931;
+    color:aliceblue;
+}
+
+.container ul li input{
+
+    background-color: #413b37;
+    color: white;
+    
+}
+.container ul li button{
+
+    background-color: #0b2931;
+    color:white;
 }

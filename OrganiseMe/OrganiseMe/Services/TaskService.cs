@@ -1,15 +1,19 @@
-﻿using OrganiseMe.Models;
-using OrganiseMe.Repositories;  
-namespace OrganiseMe.Services
-{
+﻿using OrganiseMe.Data;
+using OrganiseMe.Models;
+using Microsoft.EntityFrameworkCore;
+
+using OrganiseMe.Repositories;
+using OrganiseMe.Services;
 
 public class TaskService : ITaskService
 {
     private readonly ITaskRepository _repo;
+    private readonly AppDbContext _context;
 
-    public TaskService(ITaskRepository repo)
+    public TaskService(ITaskRepository repo, AppDbContext context)
     {
         _repo = repo;
+        _context = context;
     }
 
     public Task<IEnumerable<TaskItem>> GetAllAsync() => _repo.GetAllAsync();
@@ -25,6 +29,15 @@ public class TaskService : ITaskService
     }
 
     public Task<IEnumerable<TaskItem>> GetByStatusAsync(string status) => _repo.GetByStatusAsync(status);
-}
 
+    public async Task<List<TaskItem>> GetTasksByUserIdAsync(int userId)
+    {
+        return await _context.Tasks.Where(t => t.UserId == userId).ToListAsync();
+    }
+
+    public async Task AddTaskAsync(TaskItem task)
+    {
+        _context.Tasks.Add(task);
+        await _context.SaveChangesAsync();
+    }
 }

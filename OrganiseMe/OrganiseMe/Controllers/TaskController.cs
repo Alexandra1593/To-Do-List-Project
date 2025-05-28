@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrganiseMe.Models;
 using OrganiseMe.Services;
 
@@ -10,12 +11,52 @@ namespace OrganiseMe.Controllers
     [ApiController]
     public class TaskController : ControllerBase
     {
-        private readonly ITaskService _service;
 
-        public TaskController(ITaskService service)
+
+        private readonly ITaskService _service;
+        private readonly UserService _userService;
+
+        public TaskController(ITaskService taskService, UserService userService)
         {
-            _service = service;
+            _service = taskService;
+            _userService = userService;
         }
+
+        //[Authorize]
+        //[HttpGet("mytasks")]
+        //public async Task<IActionResult> GetMyTasks()
+        //{
+        //    var email = User.Identity?.Name;
+        //    var user = await _userService.GetByEmailAsync(email);
+        //    if (user == null) return Unauthorized();
+
+        //    var tasks = await _taskService.GetTasksByUserIdAsync(user.Id);
+        //    return Ok(tasks);
+        //}
+
+        //[Authorize]
+        //[HttpPost("create")]
+        //public async Task<IActionResult> Create([FromBody] TaskItem task)
+        //{
+        //    var email = User.Identity?.Name;
+        //    var user = await _userService.GetByEmailAsync(email);
+        //    if (user == null) return Unauthorized();
+
+        //    task.UserId = user.Id;
+        //    await _taskService.AddTaskAsync(task);
+        //    return Ok("Task created");
+        //}
+    
+
+
+
+
+
+
+
+
+
+
 
         // GET: api/task
         [HttpGet]
@@ -33,14 +74,35 @@ namespace OrganiseMe.Controllers
             return task == null ? NotFound() : Ok(task);
         }
 
-        // POST: api/task
-        [HttpPost]
+        //POST: api/task
+       [HttpPost]
         public async Task<IActionResult> Create(TaskItem task)
         {
             task.CreatedAt = DateTime.UtcNow;
             await _service.CreateAsync(task);
             return CreatedAtAction(nameof(Get), new { id = task.Id }, task);
         }
+
+
+        //[Authorize]
+        //[HttpPost("create")]
+        //public async Task<IActionResult> CreateTask([FromBody] TaskItem task)
+        //{
+        //    var email = User.Identity?.Name;
+        //    var user = await _userService.GetByEmailAsync(email!);
+
+        //    if (user == null)
+        //        return Unauthorized();
+
+        //    task.UserId = user.Id;
+        //    await _taskService.AddTaskAsync(task);
+
+        //    return Ok("Task created");
+        //}
+
+
+
+
 
         // PUT: api/task/5
         [HttpPut("{id}")]
@@ -62,6 +124,8 @@ namespace OrganiseMe.Controllers
         }
 
         // GET: api/task/filter?status=urgent
+
+        [Authorize]
         [HttpGet("filter")]
         public async Task<IActionResult> FilterByStatus([FromQuery] string status)
         {

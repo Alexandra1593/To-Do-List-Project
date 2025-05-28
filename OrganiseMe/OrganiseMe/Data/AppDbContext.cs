@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using OrganiseMe.Models;
+
+
 
 namespace OrganiseMe.Data
 {
@@ -9,6 +12,7 @@ namespace OrganiseMe.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 
     // ✅ Add this factory to fix migration issues at design time

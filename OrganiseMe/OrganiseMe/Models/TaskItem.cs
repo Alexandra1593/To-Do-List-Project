@@ -17,5 +17,11 @@ namespace OrganiseMe.Models
         public string? Column { get; set; } // "To-Do", "In Progress", "Done"
 
         public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
+
+
+
+
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

@@ -12,5 +12,9 @@ public interface ITaskService
     Task UpdateAsync(TaskItem task);
     Task DeleteAsync(int id);
     Task<IEnumerable<TaskItem>> GetByStatusAsync(string status);
+
+        Task<List<TaskItem>> GetTasksByUserIdAsync(int userId);
+        Task AddTaskAsync(TaskItem task);
+    }
 }
-}
+

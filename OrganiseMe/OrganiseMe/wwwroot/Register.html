@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link id="themeStylesheet" rel="stylesheet" href="LightTheme.css">
+    <link rel="stylesheet" href="loginStyle.css">
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="navbar.css" />
+
+
+
+    
+
+    <link rel="icon" type="image/x-icon" href="/Images/sticky-note.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="page">
+
+
+        <div class="button-container">
+           
+            <ul>
+                <li> <button id="showSignIn">Sign In</button></li>
+                
+                <li></li> <button id="allowed_btn" onclick="getProfile()">Get Protected Data</button></li> 
+
+                <li><button id="showSignUp">Sign Up</button></li>
+            </ul>
+
+        </div>
+        <div class="container" id="container">
+            <div class="form-container sign-up" id="signUpDiv">
+               
+                <ul>
+
+                    <li> <h2>Register</h2></li>
+                    <br>
+                    <li>  <input id="regFirstName" placeholder="First Name"></li>
+                    <br>
+                    <li>
+                        <input id="regLastName" placeholder="Last Name">
+                    </li>
+                    <br>
+                    <li>
+                        <input id="regEmail" placeholder="Email">
+                    </li>
+                    <br>
+                    <li>
+                        <input id="regPassword" type="password" placeholder="Password">
+                    </li>
+                    <br>
+                    <li>
+                        <input id="regDOB" type="date">
+                    </li>
+                    <br>
+               
+                    <li><button onclick="register()">Register</button> </li> 
+            </ul>
+            </div>
+
+
+
+
+
+
+            <hr>
+            <div class="form-container sign-in" id="signInDiv">
+              
+                <br>
+                <ul>
+                    <li><h2>Login</h2></li>
+                    <br>
+                    <li> <input id="loginEmail" placeholder="Email"></li>
+
+                    <br>
+                    <li>
+                        <input id="loginPassword" type="password" placeholder="Password">
+                    </li>
+                    <br>
+                    <li>
+                        <button onclick="login()">Login</button>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+
+        </div>
+
+
+
+    </div>
+<br>
+
+
+
+ 
+
+
+    <div class="theme-toggle">
+        <input type="checkbox" id="themeSwitch">
+        <label for="themeSwitch" class="toggle-label">
+            <div class="circle"></div>
+        </label>
+    </div>
+
+
+<script>
+        function register() {
+            const data = {
+                firstName: document.getElementById("regFirstName").value,
+                lastName: document.getElementById("regLastName").value,
+                email: document.getElementById("regEmail").value,
+                password: document.getElementById("regPassword").value,
+                dateOfBirth: document.getElementById("regDOB").value
+            };
+
+            fetch("http://localhost:5299/api/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => {
+                    if (res.ok) alert("Registered successfully!");
+                    else res.text().then(text => alert("Error: " + text));
+                });
+        }
+
+        function login() {
+            const data = {
+                email: document.getElementById("loginEmail").value,
+                password: document.getElementById("loginPassword").value
+            };
+
+            fetch("http://localhost:5299/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    localStorage.setItem("token", data.token);
+                    alert("Logged in! Token saved.");
+                })
+                .catch(() => alert("Invalid credentials"));
+        }
+
+        function getProfile() {
+            fetch("http://localhost:5299/api/secure/profile", {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+                .then(res => res.text())
+                .then(data => alert("Profile data: " + data));
+        }
+   
+
+</script>
+
+
+
+
+
+
+
+
+    <script src="register.js"></script>
+    <script src="script.js"></script>
+    <script src="ThemeChanger.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</body>
+</html>

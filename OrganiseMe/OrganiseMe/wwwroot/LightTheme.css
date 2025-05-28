@@ -1,3 +1,16 @@
+
+body{
+    /* background-color:#FEECE2; */
+
+
+
+      background-image: URL('/wwwroot/Images/bg-light.jpg');
+     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
 .board{
    
       background-color: #FEECE2;
@@ -53,4 +66,32 @@
 
 input[type=text]:focus {
   background-color: rgb(230, 182, 173);
+}
+
+
+
+
+
+/* Register page */
+
+
+.button-container{
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+   
+}
+
+.button-container button{
+    background-color: #7C444F;
+}
+.container ul li input{
+
+    background-color: #FFCDB2;
+}
+
+.container ul li button{
+
+    background-color: #7C444F;
+    color:white;
 }
